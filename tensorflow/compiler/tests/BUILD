@@ -1367,11 +1367,43 @@ tf_xla_py_strict_test(
         "cpu",
         "cpu_ondemand",
     ],
+    env = {"TESTBRIDGE_TEST_ONLY": "QrOpTest"},
     shard_count = 10,
     tags = [
         "no_pip",  # TODO(b/149738646): fix pip install so these tests run on kokoro pip
         "nozapfhahn",
         "optonly",
+    ],
+    deps = [
+        ":xla_test",
+        "//tensorflow/python/framework:errors",
+        "//tensorflow/python/framework:test_lib",
+        "//tensorflow/python/ops:array_ops",
+        "//tensorflow/python/ops:linalg_ops",
+        "//tensorflow/python/ops:math_ops",
+        "//tensorflow/python/platform:client_testlib",
+        "//third_party/py/numpy",
+        "@absl_py//absl/testing:parameterized",
+    ],
+)
+
+tf_xla_py_strict_test(
+    name = "qr_op_large_test",
+    size = "large",
+    srcs = ["qr_op_test.py"],
+    disabled_backends = [
+        # Test is very slow on CPU.
+        "cpu",
+        "cpu_ondemand",
+    ],
+    env = {"TESTBRIDGE_TEST_ONLY": "QrOpLargeTest"},
+    main = "qr_op_test.py",
+    shard_count = 2,
+    tags = [
+        "no_pip",  # TODO(b/149738646): fix pip install so these tests run on kokoro pip
+        "nozapfhahn",
+        "optonly",
+        "requires-mem:24g",
     ],
     deps = [
         ":xla_test",
