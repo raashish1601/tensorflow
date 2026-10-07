@@ -31,7 +31,6 @@ common_patch_list = [
     "//third_party/triton:common/mma_limit_pred.patch",
     "//third_party/triton:common/tc_disabled_kwidth_fix.patch",
     "//third_party/triton:common/enable_peer_access.patch",
-    "//third_party/triton:common/f8e5m2_conversion.patch",
     "//third_party/triton:common/no_accelerate_through_broadcast.patch",
     "//third_party/triton:common/speed_up_int4_unpacking.patch",
     "//third_party/triton:common/verify_nvmma_encoding.patch",
